@@ -1,4 +1,4 @@
-# 2. ChatClient
+# ChatClient
 
 ## ChatModel vs. ChatClient
 
