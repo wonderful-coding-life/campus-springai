@@ -7,8 +7,8 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.46/a5cfe99fdf320e84955ef653f2ce1bf789d11385/lombok-1.18.46.jar" />
         </processorPath>
-        <module name="7-rag.test" />
-        <module name="7-rag.main" />
+        <module name="8-tool.main" />
+        <module name="8-tool.test" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -37,6 +37,9 @@
       <module name="7-rag" options="-parameters" />
       <module name="7-rag.main" options="-parameters" />
       <module name="7-rag.test" options="-parameters" />
+      <module name="8-tool" options="-parameters" />
+      <module name="8-tool.main" options="-parameters" />
+      <module name="8-tool.test" options="-parameters" />
       <module name="demo" options="-parameters" />
       <module name="demo.main" options="-parameters" />
       <module name="demo.test" options="-parameters" />
