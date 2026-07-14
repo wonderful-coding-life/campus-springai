@@ -20,7 +20,7 @@ public class MarketingController {
     @Autowired
     private ChatClient chatClient;
 
-    private final Message systemMessage = SystemMessage.builder().text("""
+    private final String systemMessage = """
                 너는 전문 마케팅 카피라이터야.
                 입력된 제품 정보를 기반으로 온라인 쇼핑몰/블로그/홍보 페이지에 사용할 매력적인 마케팅 문구를 작성해 줘.
                 작성 조건
@@ -35,15 +35,15 @@ public class MarketingController {
                    - 문단은 빈 줄로 구분
                    - 핵심 특징은 Bullet List 사용
                    - 적절한 강조(**텍스트**) 사용
-            """).build();
+            """;
 
-    private final PromptTemplate promptTemplate = new PromptTemplate("""
+    private final String userMessage = """
                 입력 정보
                 - 제품명: {name}
                 - 가격: {price}
                 - 구매 링크: {link}
                 - 제품 특징: {features}
-            """);
+            """;
 
     @GetMapping("/marketing")
     public String getMarketing() {
@@ -52,14 +52,14 @@ public class MarketingController {
 
     @PostMapping("/marketing")
     public String postMarketing(String name, String price, String link, String features, Model model) {
-        Message userMessage = promptTemplate.createMessage(Map.of(
-                "name", name,
-                "price", price,
-                "link", link,
-                "features", features));
-
         String completion = chatClient.prompt()
-                .messages(systemMessage, userMessage)
+                .system(systemMessage)
+                .user(spec -> spec
+                        .text(userMessage)
+                        .param("name", name)
+                        .param("price", price)
+                        .param("link", link)
+                        .param("features", features))
                 .call()
                 .content();
 
