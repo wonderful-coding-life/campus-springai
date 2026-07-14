@@ -8,12 +8,15 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.document.DocumentReader;
 import org.springframework.ai.openai.OpenAiEmbeddingModel;
 import org.springframework.ai.reader.TextReader;
+import org.springframework.ai.reader.markdown.MarkdownDocumentReader;
+import org.springframework.ai.reader.markdown.config.MarkdownDocumentReaderConfig;
 import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.util.List;
@@ -157,7 +160,7 @@ public class RagTests {
     private void embedPdfDocument(String path) {
         DocumentReader reader = new PagePdfDocumentReader(path);
         List<Document> documents = reader.read();
-        documents.forEach(document -> document.getMetadata().put("category", "shopping"));
+        documents.forEach(document -> document.getMetadata().put("category", "pdf"));
         TokenTextSplitter splitter = TokenTextSplitter.builder().build();
         vectorStore.write(splitter.split(documents));
     }
@@ -175,7 +178,7 @@ public class RagTests {
                                 .query(question)
                                 .similarityThreshold(0.7)
                                 .topK(2)
-                                .filterExpression("category == 'shopping'")
+                                .filterExpression("category == 'markdown' || category == 'pdf'")
                                 .build())
                         .build())
                 .user(question)
@@ -183,4 +186,20 @@ public class RagTests {
 
         log.info("completion = {}", completion);
     }
+
+    @Test
+    public void testMarkdownReader() throws IOException {
+        var config = MarkdownDocumentReaderConfig.builder()
+                .withIncludeCodeBlock(true)
+                .withIncludeBlockquote(true)
+                .withHorizontalRuleCreateDocument(true)
+                .withAdditionalMetadata("category", "markdown")
+                .build();
+
+        var reader = new MarkdownDocumentReader("classpath*:*.md", config);
+
+        List<Document> documents = reader.get();
+        vectorStore.write(documents);
+    }
+
 }
