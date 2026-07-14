@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-public class ChatController {
+public class ApiController {
     @Autowired
     private ChatClient chatClient;
 

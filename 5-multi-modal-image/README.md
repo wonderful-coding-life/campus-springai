@@ -1,3 +1,5 @@
+# 이미지 멀티모달
+
 ## 멀티모달 입력 처리
 
 멀티모달 입력을 사용하려면 사용자 메시지에 `Media` 객체를 포함하면 됩니다.
@@ -27,3 +29,17 @@ String response = chatClient.prompt()
 ```
 
 이처럼 텍스트와 미디어를 하나의 사용자 메시지에 함께 포함하여 AI 모델에 전달할 수 있습니다.
+
+## 첨부 파일 크기 설정
+
+이미지 업로드를 위해 `src/main/resources/application.properties`에 multipart 제한을 설정합니다.
+
+```properties
+spring.servlet.multipart.max-file-size=10MB
+spring.servlet.multipart.max-request-size=50MB
+```
+
+- `max-file-size`: 파일 1개의 최대 크기
+- `max-request-size`: 한 요청에 포함되는 전체 multipart 데이터의 최대 크기
+
+여러 이미지를 업로드하는 `/receipts` API는 전체 요청 크기가 `max-request-size`를 넘지 않아야 합니다.

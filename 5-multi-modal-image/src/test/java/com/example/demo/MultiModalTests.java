@@ -19,7 +19,7 @@ public class MultiModalTests {
     private ResourceLoader resourceLoader;
 
     @Test
-    public void multiModalTest() {
+    public void testMultiModalImage() {
         var media = Media.builder()
                 .mimeType(MimeTypeUtils.IMAGE_JPEG)
                 .data(resourceLoader.getResource("classpath:image/car.jpg"))
@@ -29,6 +29,6 @@ public class MultiModalTests {
                         .text("자동차 모델 이름을 알려 주세요.")
                         .media(media))
                 .call().content();
-        log.info("completion: {}", completion);
+        log.info("completion = {}", completion);
     }
 }
