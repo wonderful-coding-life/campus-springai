@@ -66,6 +66,15 @@
           </set>
         </option>
       </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/9-structured-output" />
+        <option name="gradleJvm" value="temurin-21" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/9-structured-output" />
+          </set>
+        </option>
+      </GradleProjectSettings>
     </option>
   </component>
 </project>
