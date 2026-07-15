@@ -7,8 +7,8 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.46/a5cfe99fdf320e84955ef653f2ce1bf789d11385/lombok-1.18.46.jar" />
         </processorPath>
-        <module name="9-structured-output.main" />
-        <module name="9-structured-output.test" />
+        <module name="10-image.test" />
+        <module name="10-image.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -19,6 +19,9 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="10-image" options="-parameters" />
+      <module name="10-image.main" options="-parameters" />
+      <module name="10-image.test" options="-parameters" />
       <module name="2-chat-client" options="-parameters" />
       <module name="2-chat-client.main" options="-parameters" />
       <module name="2-chat-client.test" options="-parameters" />
