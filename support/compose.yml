@@ -1,0 +1,10 @@
+services:
+  mariadb:
+    image: mariadb
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - ./initdb-mariadb:/docker-entrypoint-initdb.d
+    environment:
+      MARIADB_RANDOM_ROOT_PASSWORD: 1
