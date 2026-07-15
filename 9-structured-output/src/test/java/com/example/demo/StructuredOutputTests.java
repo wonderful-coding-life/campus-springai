@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import com.example.demo.ocr.ReceiptOcr;
 import com.example.demo.ocr.ReceiptOcrBatch;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -12,13 +11,10 @@ import org.springframework.ai.converter.BeanOutputConverter;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.MimeTypeUtils;
 
 import java.text.MessageFormat;
-import java.util.List;
 
 @SpringBootTest
 @Slf4j
@@ -40,7 +36,7 @@ public class StructuredOutputTests {
                         .mimeType(MimeTypeUtils.IMAGE_JPEG).build()
         };
 
-        var converter = new BeanOutputConverter<>(new ParameterizedTypeReference<List<ReceiptOcr>>() {});
+        var converter = new BeanOutputConverter<>(ReceiptOcrBatch.class);
 
         log.info("\nformat: {}", converter.getFormat());
         log.info("\njsonSchema: {}", converter.getJsonSchema());
@@ -87,7 +83,7 @@ public class StructuredOutputTests {
                                 """)
                         .media(media))
                 .call()
-                .entity(new ParameterizedTypeReference<List<ReceiptOcr>>() {});
+                .entity(ReceiptOcrBatch.class);
 
         log.info("\n{}", completion);
     }
