@@ -3,6 +3,9 @@ package com.example.demo.tool;
 import com.example.demo.repository.ProductOrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.model.ToolContext;
+import org.springframework.ai.mcp.annotation.McpMeta;
+import org.springframework.ai.mcp.annotation.McpTool;
+import org.springframework.ai.mcp.annotation.McpToolParam;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +17,9 @@ public class ProductOrderTool {
     @Autowired
     private ProductOrderRepository repository;
 
-    @Tool(description = "상품 주문 목록을 조회합니다")
-    String getProductOrders(ToolContext toolContext) {
-        String username = (String) toolContext.getContext().get("username");
+    @McpTool(name="get-product-orders", title="상품 주문 목록 조회", description = "상품 주문 목록을 조회합니다")
+    String getProductOrders(McpMeta mcpMeta) {
+        String username = (String) mcpMeta.get("username");
         var productOrders = repository.findByMemberName(username);
         if (productOrders.isEmpty()) {
             return "주문 목록이 없습니다.";
@@ -33,9 +36,9 @@ public class ProductOrderTool {
         }
     }
 
-    @Tool(description = "상품 주문을 취소합니다")
-    String cancelProductOrder(@ToolParam(description = "주문번호") String orderNumber, ToolContext toolContext) {
-        String username = (String) toolContext.getContext().get("username");
+    @McpTool(name="cancel-product-order", title="상품 주문 취소", description = "상품 주문을 취소합니다")
+    String cancelProductOrder(@McpToolParam(description = "주문번호") String orderNumber, McpMeta mcpMeta) {
+        String username = (String) mcpMeta.get("username");
         var productOrder = repository.findByOrderNumberAndMemberName(orderNumber, username);
         if (productOrder.isPresent()) {
             if ("배송중".equals(productOrder.get().getShippingStatus())) {
