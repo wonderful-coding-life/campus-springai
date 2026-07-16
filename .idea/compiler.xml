@@ -34,6 +34,9 @@
       <module name="14-mcp-server-stdio" options="-parameters" />
       <module name="14-mcp-server-stdio.main" options="-parameters" />
       <module name="14-mcp-server-stdio.test" options="-parameters" />
+      <module name="15-mcp-client" options="-parameters" />
+      <module name="15-mcp-client.main" options="-parameters" />
+      <module name="15-mcp-client.test" options="-parameters" />
       <module name="2-chat-client" options="-parameters" />
       <module name="2-chat-client.main" options="-parameters" />
       <module name="2-chat-client.test" options="-parameters" />
