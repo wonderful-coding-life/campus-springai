@@ -5,7 +5,6 @@
 ### 스프링 이니셜라이저
 
 - Model Context Protocol Server
-- OpenAI
 - Spring Data JPA
 - H2 Database
 - Lombok

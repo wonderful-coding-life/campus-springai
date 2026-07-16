@@ -2,18 +2,15 @@ package com.example.demo.tool;
 
 import com.example.demo.repository.ProductOrderRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ai.chat.model.ToolContext;
 import org.springframework.ai.mcp.annotation.McpMeta;
 import org.springframework.ai.mcp.annotation.McpTool;
 import org.springframework.ai.mcp.annotation.McpToolParam;
-import org.springframework.ai.tool.annotation.Tool;
-import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class ProductOrderTool {
+public class ProductOrderTools {
     @Autowired
     private ProductOrderRepository repository;
 

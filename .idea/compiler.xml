@@ -7,8 +7,8 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.46/a5cfe99fdf320e84955ef653f2ce1bf789d11385/lombok-1.18.46.jar" />
         </processorPath>
-        <module name="13-mcp-server-streamable.main" />
-        <module name="13-mcp-server-streamable.test" />
+        <module name="14-mcp-server-stdio.main" />
+        <module name="14-mcp-server-stdio.test" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -31,6 +31,9 @@
       <module name="13-mcp-server-streamable" options="-parameters" />
       <module name="13-mcp-server-streamable.main" options="-parameters" />
       <module name="13-mcp-server-streamable.test" options="-parameters" />
+      <module name="14-mcp-server-stdio" options="-parameters" />
+      <module name="14-mcp-server-stdio.main" options="-parameters" />
+      <module name="14-mcp-server-stdio.test" options="-parameters" />
       <module name="2-chat-client" options="-parameters" />
       <module name="2-chat-client.main" options="-parameters" />
       <module name="2-chat-client.test" options="-parameters" />
