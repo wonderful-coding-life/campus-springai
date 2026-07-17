@@ -1,12 +1,15 @@
-# MCP Server (Stdio)
+# MCP Client
 
-현재 날짜와 시간을 알려주는 MCP Server를 작성합니다.
+지금까지 작성한 MCP Server와 연결하여 챗봇 기능을 제공하는 프로젝트입니다.
 
 ## 프로젝트 셋업
 
 ### 스프링 이니셜라이저
 
 - Spring Web
+- Spring Security
+- JDBC Chat Memory Repository
+- MariaDB Driver
 - Model Context Protocol Client
 - OpenAI
 - Lombok

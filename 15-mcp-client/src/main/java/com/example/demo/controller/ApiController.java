@@ -1,11 +1,17 @@
 package com.example.demo.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.Map;
 
@@ -16,6 +22,12 @@ public class ApiController {
 
     @Autowired
     private ToolCallbackProvider toolCallbackProvider;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @Autowired
+    private ChatMemory chatMemory;
 
     private static final String systemMessage = """
             상품 주문과 관련한 문의에 대해서는
@@ -31,13 +43,14 @@ public class ApiController {
             parent page_id: MCP-39f826bfae2180118c83f2df44acfd8a
             """;
 
-    @PostMapping("/chats")
-    public String postChats(@RequestBody String message) {
+    @PostMapping(value = "/chats", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> postChats(@RequestBody String message, Authentication authentication) {
         return chatClient.prompt()
                 .system(systemMessage)
                 .user(message)
+                .advisors(spec -> spec.param(ChatMemory.CONVERSATION_ID, authentication.getName()))
                 .tools(toolCallbackProvider)
-                .toolContext(Map.of("username", "seojun"))
-                .call().content();
+                .toolContext(Map.of("username", authentication.getName()))
+                .stream().content().map(objectMapper::writeValueAsString);
     }
 }

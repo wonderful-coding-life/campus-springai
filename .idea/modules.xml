@@ -5,6 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/13-mcp-server-streamable.main.iml" filepath="$PROJECT_DIR$/.idea/modules/13-mcp-server-streamable.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/14-mcp-server-stdio.main.iml" filepath="$PROJECT_DIR$/.idea/modules/14-mcp-server-stdio.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/15-mcp-client.main.iml" filepath="$PROJECT_DIR$/.idea/modules/15-mcp-client.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/5-multi-modal-image.main.iml" filepath="$PROJECT_DIR$/.idea/modules/5-multi-modal-image.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/7-rag.main.iml" filepath="$PROJECT_DIR$/.idea/modules/7-rag.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/7-rag.test.iml" filepath="$PROJECT_DIR$/.idea/modules/7-rag.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/springai.iml" filepath="$PROJECT_DIR$/springai.iml" />
     </modules>
   </component>
