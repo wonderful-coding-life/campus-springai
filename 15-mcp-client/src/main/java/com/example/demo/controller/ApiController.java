@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.tool.KnowledgeSearchTool;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
@@ -27,11 +28,12 @@ public class ApiController {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private ChatMemory chatMemory;
+    private KnowledgeSearchTool knowledgeSearchTool;
 
     private static final String systemMessage = """
             상품 주문과 관련한 문의에 대해서는
             캠퍼스 쇼핑몰의 고객지원 상담사로서 답변은 짥고 명료하게 해 주세요.
+            도구 호출, 판단, 분석, 내부 지시, 응답 계획 등 처리 과정을 노출하지 말고, 사용자에게 필요한 최종 답변만 한국어로 출력하세요.
             --------
             파일 생성, 수정, 읽기 작업 시 사용자가 경로를 명시하지 않으면
             항상 다음 디렉토리를 기본 작업 디렉토리로 사용하세요.
@@ -49,7 +51,7 @@ public class ApiController {
                 .system(systemMessage)
                 .user(message)
                 .advisors(spec -> spec.param(ChatMemory.CONVERSATION_ID, authentication.getName()))
-                .tools(toolCallbackProvider)
+                .tools(knowledgeSearchTool, toolCallbackProvider)
                 .toolContext(Map.of("username", authentication.getName()))
                 .stream().content().map(objectMapper::writeValueAsString);
     }

@@ -27,6 +27,7 @@ dependencies {
 	implementation 'org.springframework.ai:spring-ai-starter-model-openai'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.ai:spring-ai-starter-model-chat-memory-repository-jdbc'
+	implementation 'org.springframework.ai:spring-ai-starter-vector-store-mariadb'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'

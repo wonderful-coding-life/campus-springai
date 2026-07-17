@@ -9,6 +9,7 @@
 - Spring Web
 - Spring Security
 - JDBC Chat Memory Repository
+- MariaDB Vector Database
 - MariaDB Driver
 - Model Context Protocol Client
 - OpenAI
