@@ -1,5 +1,13 @@
 # ChatClient
 
+## Project Setup
+
+* Spring Web
+* Thymeleaf
+* OpenAI
+* Lombok
+* CommonMark Java Core
+
 ## ChatModel vs. ChatClient
 
 * **ChatModel**
