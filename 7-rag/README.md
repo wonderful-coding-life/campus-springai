@@ -1,5 +1,15 @@
 # RAG (Retrieval-Augmented Generation) Project
 
+## 프로젝트 생성
+
+* Spring Web
+* OpenAI
+* MariaDB Vector Database
+* Spring Data JDBC
+* MariaDB Driver
+* PDF Document Reader
+* Markdown Documente Reader
+
 ## JDBC 의존성 구성
 
 JPA 또는 MyBatis의 Spring Boot Starter를 사용하면 내부적으로 `spring-boot-starter-jdbc`가 포함되므로 별도로 추가할 필요가 없습니다.
