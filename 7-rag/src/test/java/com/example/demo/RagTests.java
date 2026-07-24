@@ -27,9 +27,6 @@ public class RagTests {
     @Autowired
     private OpenAiEmbeddingModel embeddingModel;
 
-    @Autowired
-    private ChatClient chatClient;
-
     @Test
     public void testEmbedding() {
         float[] embedding = embeddingModel.embed("""
@@ -42,6 +39,9 @@ public class RagTests {
             """);
         log.info("\n{} {}", embedding.length, embedding);
     }
+
+    @Autowired
+    private VectorStore vectorStore;
 
     private final List<String> texts = List.of("""
             [무선 청소기 사용 설명서]
@@ -94,20 +94,19 @@ public class RagTests {
             부적절한 경비 사용이 확인될 경우, 차기 급여에서 공제될 수 있습니다.
             """);
 
-    @Autowired
-    private VectorStore vectorStore;
-
     @Test
     public void testVectorStore() {
         var documents = texts.stream().map(Document::new).toList();
         vectorStore.write(documents);
     }
 
+    @Autowired
+    private ChatClient chatClient;
+
     @Test
     public void testSimilaritySearch() {
-        //var question = "무선청소기 배터리 수명은 얼마나 되나요?";
+        var question = "무선청소기 배터리 수명은 얼마나 되나요?";
         //var question = "사용자의 실수로 제품이 고장 났을 때 무상 수리가 가능한가요?";
-        var question = "신입사원은 수습 기간이 얼마나 되나요?";
 
         var documents = vectorStore.similaritySearch(question);
         var information = String.join("\n", documents.stream().map(Document::getText).toList());
@@ -125,7 +124,7 @@ public class RagTests {
                         .param("question", question)
                 ).call().content();
 
-        log.info("completion = {}", completion);
+        log.info("\ncompletion = {}", completion);
     }
 
     @Test
@@ -148,7 +147,7 @@ public class RagTests {
                 .user(question)
                 .call().content();
 
-        log.info("completion = {}", completion);
+        log.info("\ncompletion = {}", completion);
     }
 
     @Test
@@ -178,13 +177,13 @@ public class RagTests {
                                 .query(question)
                                 .similarityThreshold(0.7)
                                 .topK(2)
-                                .filterExpression("category == 'markdown' || category == 'pdf'")
+                                .filterExpression("category == 'markdown'")
                                 .build())
                         .build())
                 .user(question)
                 .call().content();
 
-        log.info("completion = {}", completion);
+        log.info("\ncompletion = {}", completion);
     }
 
     @Test
