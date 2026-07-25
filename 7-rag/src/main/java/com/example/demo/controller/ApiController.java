@@ -26,7 +26,7 @@ public class ApiController {
                                 .query(message)
                                 .similarityThreshold(0.7)
                                 .topK(2)
-                                .filterExpression("category == 'shopping'")
+                                .filterExpression("category == 'markdown'")
                                 .build())
                         .build())
                 .user(message)
