@@ -1,337 +1,218 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chat Memory Test</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --bg: #f6f7f9;
-      --panel: #ffffff;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --border: #d7dce2;
-      --primary: #2563eb;
-      --primary-hover: #1d4ed8;
-      --assistant: #eef2f7;
-      --user: #dbeafe;
-      --danger: #b91c1c;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    main {
-      width: min(920px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 28px 0;
-    }
-
-    .shell {
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      min-height: calc(100vh - 56px);
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 16px 40px rgba(31, 41, 55, 0.08);
-    }
-
-    header {
-      display: flex;
-      gap: 16px;
-      align-items: end;
-      justify-content: space-between;
-      padding: 18px 20px;
-      border-bottom: 1px solid var(--border);
-      background: #fbfcfe;
-    }
-
-    h1 {
-      margin: 0 0 4px;
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 0;
-    }
-
-    .subtitle {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .conversation {
-      display: grid;
-      gap: 8px;
-      min-width: 220px;
-    }
-
-    label {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    input,
-    textarea,
-    button {
-      font: inherit;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      background: #fff;
-      color: var(--text);
-      outline: none;
-    }
-
-    input {
-      height: 38px;
-      padding: 0 11px;
-    }
-
-    textarea {
-      min-height: 72px;
-      max-height: 180px;
-      resize: vertical;
-      padding: 11px;
-      line-height: 1.45;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
-    }
-
-    #messages {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      min-height: 360px;
-      padding: 20px;
-      overflow-y: auto;
-    }
-
-    .empty {
-      margin: auto;
-      color: var(--muted);
-      text-align: center;
-      font-size: 14px;
-    }
-
-    .message {
-      max-width: min(680px, 88%);
-      padding: 12px 14px;
-      border-radius: 8px;
-      line-height: 1.5;
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-    }
-
-    .message.user {
-      align-self: flex-end;
-      background: var(--user);
-    }
-
-    .message.assistant {
-      align-self: flex-start;
-      background: var(--assistant);
-    }
-
-    .message.error {
-      align-self: stretch;
-      max-width: 100%;
-      background: #fee2e2;
-      color: var(--danger);
-      border: 1px solid #fecaca;
-    }
-
-    form {
-      display: grid;
-      gap: 12px;
-      padding: 16px 20px 20px;
-      border-top: 1px solid var(--border);
-      background: #fbfcfe;
-    }
-
-    .actions {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      justify-content: flex-end;
-    }
-
-    button {
-      height: 40px;
-      padding: 0 16px;
-      border: 0;
-      border-radius: 6px;
-      background: var(--primary);
-      color: #fff;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    button:hover:not(:disabled) {
-      background: var(--primary-hover);
-    }
-
-    button:disabled {
-      cursor: not-allowed;
-      opacity: 0.62;
-    }
-
-    .status {
-      min-height: 20px;
-      color: var(--muted);
-      font-size: 13px;
-      margin-right: auto;
-    }
-
-    @media (max-width: 640px) {
-      main {
-        width: 100%;
-        padding: 0;
-      }
-
-      .shell {
-        min-height: 100vh;
-        border: 0;
-        border-radius: 0;
-      }
-
-      header {
-        display: grid;
-        align-items: stretch;
-      }
-
-      .conversation {
-        min-width: 0;
-      }
-
-      .message {
-        max-width: 94%;
-      }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 채팅</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<main>
-  <section class="shell">
-    <header>
-      <div>
-        <h1>ChatBotController /chats 테스트</h1>
-        <p class="subtitle">POST /chats?id=&lt;대화 ID&gt; 로 메시지를 전송합니다.</p>
-      </div>
-      <div class="conversation">
-        <label for="conversationId">대화 ID</label>
-        <input id="conversationId" type="text" autocomplete="off" />
-      </div>
-    </header>
+<body class="min-h-screen bg-slate-100 text-slate-900 antialiased">
+  <main class="mx-auto flex min-h-screen w-full max-w-3xl items-center px-4 py-6 sm:px-6">
+    <section id="startScreen" class="w-full rounded-2xl bg-white p-8 shadow-sm sm:p-10">
+      <div class="mx-auto max-w-sm text-center">
+        <h1 class="text-2xl font-bold tracking-tight">AI와 대화하기</h1>
+        <p class="mt-2 text-sm text-slate-500">사용자 아이디를 입력해 대화를 시작하세요.</p>
 
-    <section id="messages" aria-live="polite">
-      <p class="empty">메시지를 입력하면 응답이 여기에 표시됩니다.</p>
+        <form id="startForm" class="mt-8 space-y-4">
+          <div class="text-left">
+            <label for="userId" class="mb-2 block text-sm font-medium">사용자 아이디</label>
+            <input
+              id="userId"
+              name="userId"
+              type="text"
+              maxlength="100"
+              autocomplete="username"
+              placeholder="아이디를 입력하세요"
+              required
+              class="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+            >
+            <p id="startError" class="mt-2 hidden text-sm text-red-600" role="alert"></p>
+          </div>
+          <button type="submit" class="w-full rounded-xl bg-blue-600 px-4 py-3 font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-200">
+            대화 시작
+          </button>
+        </form>
+      </div>
     </section>
 
-    <form id="chatForm">
-      <label for="message">메시지</label>
-      <textarea id="message" placeholder="질문을 입력하세요." required></textarea>
-      <div class="actions">
-        <span id="status" class="status"></span>
-        <button id="sendButton" type="submit">전송</button>
+    <section id="chatScreen" class="hidden h-[calc(100vh-3rem)] max-h-[760px] min-h-[520px] w-full overflow-hidden rounded-2xl bg-white shadow-sm" aria-label="대화 화면">
+      <div class="flex h-full flex-col">
+        <header class="flex items-center justify-between border-b border-slate-200 px-5 py-4 sm:px-6">
+          <div class="min-w-0">
+            <p class="text-xs font-medium text-slate-500">현재 사용자</p>
+            <h1 id="currentUserId" class="truncate font-semibold"></h1>
+          </div>
+          <button id="leaveButton" type="button" class="ml-4 shrink-0 rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-100">
+            나가기
+          </button>
+        </header>
+
+        <div id="messages" class="flex flex-1 flex-col gap-3 overflow-y-auto bg-slate-50 p-5 sm:p-6" aria-live="polite" aria-label="메시지 목록">
+          <p id="emptyMessage" class="m-auto text-center text-sm text-slate-400">메시지를 보내 대화를 시작해 보세요.</p>
+        </div>
+
+        <form id="chatForm" class="border-t border-slate-200 p-4 sm:p-5">
+          <div class="flex items-end gap-3">
+            <label for="messageInput" class="sr-only">메시지</label>
+            <textarea
+              id="messageInput"
+              rows="1"
+              maxlength="4000"
+              placeholder="메시지를 입력하세요"
+              required
+              class="max-h-32 min-h-11 flex-1 resize-none rounded-xl border border-slate-300 px-4 py-2.5 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 disabled:bg-slate-100"
+            ></textarea>
+            <button id="sendButton" type="submit" class="h-11 shrink-0 rounded-xl bg-blue-600 px-5 font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-200 disabled:cursor-not-allowed disabled:opacity-50">
+              전송
+            </button>
+          </div>
+          <p id="chatStatus" class="mt-2 min-h-5 text-sm text-slate-500" role="status"></p>
+        </form>
       </div>
-    </form>
-  </section>
-</main>
+    </section>
+  </main>
 
-<script>
-  const conversationIdInput = document.querySelector("#conversationId");
-  const form = document.querySelector("#chatForm");
-  const messageInput = document.querySelector("#message");
-  const messages = document.querySelector("#messages");
-  const status = document.querySelector("#status");
-  const sendButton = document.querySelector("#sendButton");
+  <script>
+    const startScreen = document.querySelector("#startScreen");
+    const chatScreen = document.querySelector("#chatScreen");
+    const startForm = document.querySelector("#startForm");
+    const userIdInput = document.querySelector("#userId");
+    const startError = document.querySelector("#startError");
+    const currentUserId = document.querySelector("#currentUserId");
+    const leaveButton = document.querySelector("#leaveButton");
+    const chatForm = document.querySelector("#chatForm");
+    const messageInput = document.querySelector("#messageInput");
+    const sendButton = document.querySelector("#sendButton");
+    const messages = document.querySelector("#messages");
+    const chatStatus = document.querySelector("#chatStatus");
 
-  const savedConversationId = localStorage.getItem("chat-test-conversation-id");
-  conversationIdInput.value = savedConversationId || crypto.randomUUID();
+    let activeUserId = "";
+    let requestInProgress = false;
 
-  conversationIdInput.addEventListener("change", () => {
-    localStorage.setItem("chat-test-conversation-id", conversationIdInput.value.trim());
-  });
+    startForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const userId = userIdInput.value.trim();
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const conversationId = conversationIdInput.value.trim();
-    const message = messageInput.value.trim();
-
-    if (!conversationId || !message) {
-      return;
-    }
-
-    localStorage.setItem("chat-test-conversation-id", conversationId);
-    addMessage("user", message);
-    messageInput.value = "";
-    setLoading(true);
-
-    try {
-      const response = await fetch(`/chats?id=${encodeURIComponent(conversationId)}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain;charset=UTF-8"
-        },
-        body: message
-      });
-
-      const text = await response.text();
-
-      if (!response.ok) {
-        throw new Error(text || `${response.status} ${response.statusText}`);
+      if (!userId) {
+        startError.textContent = "사용자 아이디를 입력해 주세요.";
+        startError.classList.remove("hidden");
+        userIdInput.focus();
+        return;
       }
 
-      addMessage("assistant", text || "(빈 응답)");
-    } catch (error) {
-      addMessage("error", `요청 실패: ${error.message}`);
-    } finally {
-      setLoading(false);
+      startError.classList.add("hidden");
+      activeUserId = userId;
+      currentUserId.textContent = userId;
+      startScreen.classList.add("hidden");
+      chatScreen.classList.remove("hidden");
       messageInput.focus();
+    });
+
+    chatForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const message = messageInput.value.trim();
+
+      if (!message || !activeUserId || requestInProgress) return;
+
+      addMessage("user", message);
+      messageInput.value = "";
+      setSending(true);
+
+      try {
+        const response = await fetch(`/chats?id=${encodeURIComponent(activeUserId)}`, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=UTF-8" },
+          body: message
+        });
+        const responseText = await response.text();
+
+        if (!response.ok) {
+          throw new Error(responseText || `서버 오류 (${response.status})`);
+        }
+
+        addMessage("assistant", responseText || "응답 내용이 없습니다.");
+      } catch (error) {
+        addMessage("error", `메시지를 보내지 못했습니다. ${error.message}`);
+      } finally {
+        setSending(false);
+        messageInput.focus();
+      }
+    });
+
+    messageInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" && !event.shiftKey && !event.isComposing) {
+        event.preventDefault();
+        chatForm.requestSubmit();
+      }
+    });
+
+    leaveButton.addEventListener("click", async () => {
+      if (!activeUserId || requestInProgress) return;
+
+      leaveButton.disabled = true;
+      chatStatus.textContent = "대화를 종료하는 중...";
+
+      try {
+        const response = await fetch(`/chats?id=${encodeURIComponent(activeUserId)}`, {
+          method: "DELETE"
+        });
+
+        if (!response.ok) {
+          const responseText = await response.text();
+          throw new Error(responseText || `서버 오류 (${response.status})`);
+        }
+
+        showStartScreen();
+      } catch (error) {
+        chatStatus.textContent = `나가지 못했습니다. ${error.message}`;
+      } finally {
+        leaveButton.disabled = false;
+      }
+    });
+
+    function addMessage(type, text) {
+      document.querySelector("#emptyMessage")?.remove();
+
+      const wrapper = document.createElement("div");
+      const bubble = document.createElement("div");
+      wrapper.className = type === "user" ? "flex justify-end" : "flex justify-start";
+      bubble.className = type === "user"
+        ? "max-w-[85%] whitespace-pre-wrap break-words rounded-2xl rounded-br-md bg-blue-600 px-4 py-3 text-sm leading-6 text-white"
+        : type === "error"
+          ? "max-w-[85%] whitespace-pre-wrap break-words rounded-2xl rounded-bl-md bg-red-50 px-4 py-3 text-sm leading-6 text-red-700 ring-1 ring-red-200"
+          : "max-w-[85%] whitespace-pre-wrap break-words rounded-2xl rounded-bl-md bg-white px-4 py-3 text-sm leading-6 text-slate-800 shadow-sm ring-1 ring-slate-200";
+      bubble.textContent = text;
+      wrapper.appendChild(bubble);
+      messages.appendChild(wrapper);
+      messages.scrollTop = messages.scrollHeight;
     }
-  });
 
-  function addMessage(type, text) {
-    const empty = messages.querySelector(".empty");
-    if (empty) {
-      empty.remove();
+    function setSending(isSending) {
+      requestInProgress = isSending;
+      sendButton.disabled = isSending;
+      messageInput.disabled = isSending;
+      leaveButton.disabled = isSending;
+      chatStatus.textContent = isSending ? "AI의 답변을 기다리는 중..." : "";
     }
 
-    const item = document.createElement("div");
-    item.className = `message ${type}`;
-    item.textContent = text;
-    messages.appendChild(item);
-    messages.scrollTop = messages.scrollHeight;
-  }
+    function showStartScreen() {
+      activeUserId = "";
+      currentUserId.textContent = "";
+      userIdInput.value = "";
+      messageInput.value = "";
+      chatStatus.textContent = "";
+      messages.replaceChildren();
 
-  function setLoading(isLoading) {
-    sendButton.disabled = isLoading;
-    messageInput.disabled = isLoading;
-    conversationIdInput.disabled = isLoading;
-    status.textContent = isLoading ? "응답을 기다리는 중..." : "";
-  }
-</script>
+      const emptyMessage = document.createElement("p");
+      emptyMessage.id = "emptyMessage";
+      emptyMessage.className = "m-auto text-center text-sm text-slate-400";
+      emptyMessage.textContent = "메시지를 보내 대화를 시작해 보세요.";
+      messages.appendChild(emptyMessage);
+
+      chatScreen.classList.add("hidden");
+      startScreen.classList.remove("hidden");
+      userIdInput.focus();
+    }
+  </script>
 </body>
 </html>
