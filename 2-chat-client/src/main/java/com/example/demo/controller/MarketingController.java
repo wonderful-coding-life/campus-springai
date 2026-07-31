@@ -66,7 +66,7 @@ public class MarketingController {
         Node document = parser.parse(completion);
         HtmlRenderer renderer = HtmlRenderer.builder().build();
         String html = renderer.render(document);
-        model.addAttribute("completionHtml", html);
+        model.addAttribute("formatted", html);
         return "marketing-response";
     }
 }

@@ -6,10 +6,10 @@
 </head>
 <body>
 <main class="container">
-    <div class="result" th:text="${completion}">결과가 여기에 표시됩니다.</div>
+    <div th:text="${completion}">결과가 여기에 표시됩니다.</div>
     <hr>
-    <div class="result" th:utext="${completionHtml}">결과가 여기에 표시됩니다.</div>
-    <p class="actions"><a class="button" th:href="@{/marketing}">마케팅 문구 작성</a></p>
+    <div th:utext="${formatted}">결과가 여기에 표시됩니다.</div>
+    <p><a th:href="@{/marketing}">마케팅 문구 작성</a></p>
 </main>
 </body>
 </html>

@@ -12,7 +12,7 @@ public class ApiController {
     @Autowired
     private ChatModel chatModel;
 
-    @PostMapping("/chats/model")
+    @PostMapping("/api/v1/chats")
     public String postChatModel(@RequestBody String message) {
         return chatModel.call(message);
     }
@@ -20,7 +20,7 @@ public class ApiController {
     @Autowired
     private ChatClient chatClient;
 
-    @PostMapping("/chats/client")
+    @PostMapping(value = {"/api/v2/chats", "/chats"})
     public String postChatClient(@RequestBody String message) {
         return chatClient.prompt()
                 .user(message)
