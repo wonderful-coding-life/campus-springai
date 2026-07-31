@@ -1,6 +1,4 @@
-
 # ChatOptions
-
 
 ## 챗옵션 설정
 
@@ -31,13 +29,15 @@ public ChatClient chatClient(ChatClient.Builder builder) {
 ### ChatClient 옵션 설정
 
 ```java
-chatClient.prompt()
-        .options(OpenAiChatOptions.builder()
-                .model("gpt-5.6-terra")
-                .serviceTier("default") // default, flex, priority
-                .reasoningEffort("none") // none, low, medium, high, xhigh, max
-        .user("최근 AI 산업의 흐름을 볼 때, 우리나라 경제와 산업에는 어떤 영향이 있을까요?")
-        .call().content();
+public void run(ApplicationArguments args) {
+    log.info("{}", chatClient.prompt()
+            .options(OpenAiChatOptions.builder()
+                    .model("gpt-5.6-terra")
+                    .serviceTier("default")
+                    .reasoningEffort("none"))
+            .user("최근 AI 산업의 흐름을 볼 때, 우리나라 경제와 산업에는 어떤 영향이 있을까요?")
+            .call().content());
+}
 ```
 
 ## RateLimit 테스트 참고
@@ -68,13 +68,12 @@ var chatResponse = chatClient.prompt()
         .call().chatResponse();
 ```
 
-`OPENAI_API_KEY` 환경 변수를 설정한 후 애플리케이션을 실행하면 `ChatResponseMetadata`에서 `RateLimit` 정보를 확인할 수 있다.
-
 ---
 
 ## Temperature와 Top P
 
-대화형 AI 모델은 `temperature`와 `topP` 옵션을 사용하여 답변의 다양성을 조절할 수 있다.
+대화형 AI 모델은 `temperature`와 `topP` 옵션을 사용하여 답변의 다양성과 창의성을 조절할 수 있다.
+모델에 따라 지원하지 않는 것도 있으며 이런 경우는 프롬프트로 다양성과 창의성을 조절해야 한다.
 
 ### Temperature
 
