@@ -8,7 +8,7 @@
 * Spring Data JDBC
 * MariaDB Driver
 * PDF Document Reader
-* Markdown Documente Reader
+* Markdown Document Reader
 
 ## JDBC 의존성 구성
 

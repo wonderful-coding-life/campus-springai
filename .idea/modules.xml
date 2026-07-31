@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/5-multi-modal-image.main.iml" filepath="$PROJECT_DIR$/.idea/modules/5-multi-modal-image.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/7-rag.main.iml" filepath="$PROJECT_DIR$/.idea/modules/7-rag.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/7-rag.test.iml" filepath="$PROJECT_DIR$/.idea/modules/7-rag.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/8-tool.main.iml" filepath="$PROJECT_DIR$/.idea/modules/8-tool.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/8-tool.test.iml" filepath="$PROJECT_DIR$/.idea/modules/8-tool.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/springai.iml" filepath="$PROJECT_DIR$/springai.iml" />
     </modules>
