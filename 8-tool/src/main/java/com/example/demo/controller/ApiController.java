@@ -5,6 +5,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -30,12 +31,12 @@ public class ApiController {
         """;
 
     @PostMapping("/chats")
-    public String postChats(@RequestBody String message) {
+    public String postChats(@RequestBody String message, @RequestParam("id") String id) {
         return chatClient.prompt()
                 .system(systemMessage)
                 .user(message)
                 .tools(productOrderTool)
-                .toolContext(Map.of("username", "seojun"))
+                .toolContext(Map.of("username", id))
                 .call().content();
     }
 }
