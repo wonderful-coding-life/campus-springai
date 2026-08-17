@@ -20,7 +20,7 @@ public class ApiController {
     @PostMapping(value = "/images", produces = MediaType.IMAGE_PNG_VALUE)
     public byte[] getImages(@RequestBody String message) {
         var options = OpenAiImageOptions.builder()
-                .model("gpt-image-1-mini")
+                .model("gpt-image-2")
                 .build();
         var response = imageModel.call(new ImagePrompt(message, options));
         var b64Json = Objects.requireNonNull(response.getResult()).getOutput().getB64Json();

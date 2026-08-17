@@ -84,13 +84,13 @@ public class ImageModelTests {
     @Test
     public void testImageModelWithOptions() throws IOException {
         var options = OpenAiImageOptions.builder()
-                .model("gpt-image-1-mini") // gpt-image-1-mini, gpt-image-2 (protected)
-                .quality("medium") // high, medium, low, auto
+                .model("gpt-image-2")
+                .quality("low") // high, medium, low, auto
                 .width(1024) // 1024, 1536
                 .height(1024) // 1024, 1535
                 .build();
 
-        var response = imageModel.call(new ImagePrompt(message3, options));
+        var response = imageModel.call(new ImagePrompt(message1, options));
         var b64Json = Objects.requireNonNull(response.getResult()).getOutput().getB64Json();
         if (b64Json != null) {
             log.info("\bBase64 JSON length: {}", b64Json.length());

@@ -28,10 +28,10 @@ GPT Image 프롬프트는 "무엇을 그릴지"보다:
 
 용도 명확, 브랜드 요구사항 구체적, 스타일 키워드 좋음, 조명과 분위기 표현 좋음.
 ```text
-Create a premium Instagram marketing banner for Hacker's Cafe summer coffee promotion.
+Create a premium Instagram marketing banner for Campus Cafe summer coffee promotion.
 
 Requirements:
-- prominently feature the brand name "Hacker's Cafe"
+- prominently feature the brand name "Campus Cafe"
 - modern premium cafe branding
 - iced coffee on marble table
 - warm natural sunlight
@@ -46,7 +46,7 @@ Requirements:
 장면 + 분위기 + 스타일 + 브랜드가 잘 설명
 ```text
 화성 표면에서 탐사 로버가 움직이고 있으며, 그 옆에는 2족 보행 로봇이 함께 탐사 활동을 하고 있다.
-탐사 로버와 2족 보행 로봇에는 모두 "Hacker's Campus" 로고와 브랜드명이 선명하게 표시되어 있다.
+탐사 로버와 2족 보행 로봇에는 모두 "Campus Campus" 로고와 브랜드명이 선명하게 표시되어 있다.
 붉은 모래 언덕과 먼지 낀 하늘이 배경이며, 태양빛이 낮게 비추는 오후의 분위기.
 실제 사진처럼 보이는 고해상도 장면, 자연스러운 그림자와 질감, 시네마틱한 우주 탐사 분위기, 사실적인 금속 재질 표현.
 ```

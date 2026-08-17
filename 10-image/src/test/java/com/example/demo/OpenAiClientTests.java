@@ -64,11 +64,11 @@ public class OpenAiClientTests {
                         .build();
 
         ImageEditParams params = ImageEditParams.builder()
-                .model("gpt-image-1.5")
+                .model("gpt-image-2")
                 .image(imageField)
                 .prompt(prompt)
                 .size(ImageEditParams.Size._1024X1024)
-                .quality(ImageEditParams.Quality.AUTO)
+                .quality(ImageEditParams.Quality.LOW)
                 .build();
 
         ImagesResponse response = openAIClient.images().edit(params);
