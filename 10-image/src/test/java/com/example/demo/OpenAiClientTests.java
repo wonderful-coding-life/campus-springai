@@ -65,8 +65,8 @@ public class OpenAiClientTests {
 
         ImageEditParams params = ImageEditParams.builder()
                 .model("gpt-image-2")
-                .image(imageField)
                 .prompt(prompt)
+                .image(imageField)
                 .size(ImageEditParams.Size._1024X1024)
                 .quality(ImageEditParams.Quality.LOW)
                 .build();
