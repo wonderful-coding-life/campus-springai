@@ -23,7 +23,7 @@ public class ApiController {
                 .model("gpt-image-2")
                 .build();
         var response = imageModel.call(new ImagePrompt(message, options));
-        var b64Json = Objects.requireNonNull(response.getResult()).getOutput().getB64Json();
+        var b64Json = response.getResult().getOutput().getB64Json();
         return Base64.getDecoder().decode(b64Json);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +17,8 @@ import java.util.Base64;
 import java.util.Objects;
 
 @SpringBootTest
+@Slf4j
 public class ImageModelTests {
-    private static final Logger log = LoggerFactory.getLogger(ImageModelTests.class);
-
     @Autowired
     private ImageModel imageModel;
 
@@ -83,21 +83,20 @@ public class ImageModelTests {
 
     @Test
     public void testImageModelWithOptions() throws IOException {
-        var options = OpenAiImageOptions.builder()
-                .model("gpt-image-2")
-                .quality("medium") // high, medium, low, auto
-                .width(1024) // 1024, 1536
-                .height(1024) // 1024, 1535
-                .build();
+        var prompt = new ImagePrompt(
+                message4,
+                OpenAiImageOptions.builder()
+                        .model("gpt-image-2")
+                        .quality("low") // high, medium, low, auto
+                        .width(1024) // 1024, 1536
+                        .height(1024) // 1024, 1536
+                        .build()
+        );
 
-        var response = imageModel.call(new ImagePrompt(message4, options));
-        var b64Json = Objects.requireNonNull(response.getResult()).getOutput().getB64Json();
-        if (b64Json != null) {
-            log.info("\bBase64 JSON length: {}", b64Json.length());
-            log.info("\n{}", b64Json);
-            byte[] imageBytes = Base64.getDecoder().decode(b64Json);
-            // support only png format for b64_json response, so we can save the file with .png extension
-            Files.write(Paths.get("D:/output/openai-image-sun-scream.png"), imageBytes);
-        }
+        var response = imageModel.call(prompt);
+        var b64Json = response.getResult().getOutput().getB64Json();
+        log.info("{}", b64Json);
+        byte[] imageBytes = Base64.getDecoder().decode(b64Json);
+        Files.write(Paths.get("D:/output/openai-image.png"), imageBytes);
     }
 }
