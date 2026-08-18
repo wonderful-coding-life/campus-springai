@@ -22,14 +22,14 @@ public class ElevenLabsSpeechModelTests {
             문의하신 맥북에어는 현재 배송 준비 중입니다.
             예상 도착 시간은 오후 3시이며,
             배송기사 도착전 문자메시지가 발송될 예정입니다.
-            추가 문의사항이 있으시면 “상담원 연결”이라고 말씀해 주세요.
+            추가 문의사항이 있으시면 "상담원 연결"이라고 말씀해 주세요.
             """;
 
     private String textEng = """
             Hello, this is the Campus Customer Support Center.
             The MacBook Air you inquired about is currently being prepared for delivery.
             The estimated arrival time is 3:00 PM, and a text message notification will be sent before the delivery driver arrives.
-            If you have any additional questions, please say “Connect me to an agent.”
+            If you have any additional questions, please say "Connect me to an agent."
             """;
 
     @Test
@@ -37,7 +37,7 @@ public class ElevenLabsSpeechModelTests {
         // Eunha(cBOtnpVZNlQ5VJygXGB8) - Elegant Korean Female
         // Stella(2vbhUP8zyKg4dEZaTWGn) - Warm and Natural
         ElevenLabsTextToSpeechOptions speechOptions = ElevenLabsTextToSpeechOptions.builder()
-                .model("eleven_multilingual_v2") // eleven_v3, eleven_flash_v2_5, eleven_multilingual_v2, etc...
+                .model("eleven_v3") // eleven_v3, eleven_flash_v2_5, eleven_multilingual_v2, etc...
                 .voiceId("cBOtnpVZNlQ5VJygXGB8")
                 .build();
 

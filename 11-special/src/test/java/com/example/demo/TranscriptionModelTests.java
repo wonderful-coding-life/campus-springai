@@ -49,7 +49,7 @@ public class TranscriptionModelTests {
     @Test
     public void testTranscriptModelOptions() throws IOException {
         OpenAiAudioTranscriptionOptions openAiAudioTranscriptionOptions = OpenAiAudioTranscriptionOptions.builder()
-                .model("whisper-1")
+                .model("whisper-1") // gpt-transcribe, whisper-1
                 .language("ko")
                 .responseFormat(AudioResponseFormat.SRT)
                 .build();
