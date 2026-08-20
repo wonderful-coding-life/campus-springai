@@ -79,6 +79,70 @@ Integration이 페이지에 연결되어 있어야 MCP 서버가 해당 페이�
 
 ```text
 https://app.notion.com/p/{page-id}?source=copy_link
+https://app.notion.com/p/AI-{page-id}?source=copy_link
 ```
 
-URL의 `{page-id}` 부분을 MCP 서버 설정에 사용합니다.
+노션 페이지 URL의 구조는 조금씩 바뀌고 있으나 마지막 32자리의 UUID 부분 `{page-id}` 이 부분이 페이지 ID이고 이것을 MCP 서버 설정에 사용합니다.
+
+### 5. MCP Inspector로 테스트
+
+MCP Inspector를 실행합니다.
+
+```
+npx @modelcontextprotocol/inspector
+```
+
+다음과 같이 서버를 등록합니다.
+
+* Transport - stdio (local process)
+* Command - npx
+* Arguments - 두줄에 나누어 각각 -y 그리고 @notionhq/notion-mcp-server
+* Environment - NOTION_TOKEN=ntn_xxx
+
+페이지 작성은 API-post-page 도구를 선택하고 다음과 같이 입력
+
+* parent
+
+```json
+{
+  "page_id": "3c2597ed70478092a2bbf781dc7afbbd"
+}
+```
+
+* properties
+
+```json
+{
+  "title": {
+    "title": [
+      {
+        "type": "text",
+        "text": {
+          "content": "MCP 테스트 페이지"
+        }
+      }
+    ]
+  }
+}
+```
+
+* children
+
+```json
+[
+  {
+    "object": "block",
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Notion MCP Inspector에서 생성한 테스트 페이지입니다."
+          }
+        }
+      ]
+    }
+  }
+]
+```

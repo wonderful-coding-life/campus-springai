@@ -3,36 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Chat</title>
-    <link rel="stylesheet" href="/style.css">
+    <meta name="theme-color" content="#f7f7f5">
+    <title>Campus Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<main class="chat-app">
-    <header class="chat-header">
-        <div class="logo" aria-hidden="true">AI</div>
-        <div>
-            <h1>AI Assistant</h1>
-            <p><span class="status-dot"></span>온라인</p>
-        </div>
-        <a class="logout-button" href="/logout">로그아웃</a>
+<div class="app-shell">
+    <header class="topbar">
+        <a class="brand" href="/" aria-label="Campus Assistant 홈">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 32 32" role="img"><path d="M7.2 9.2 16 4l8.8 5.2v10.4L16 25l-8.8-5.4V9.2Z"/><path d="m11 13 5-3 5 3v6l-5 3-5-3v-6Z"/></svg>
+            </span>
+            <span>Campus <strong>Assistant</strong></span>
+        </a>
+        <div class="status" aria-label="서비스 상태"><span></span> AI ONLINE</div>
     </header>
 
-    <section id="messages" class="messages" aria-live="polite" aria-label="채팅 메시지">
-        <div class="message-row assistant">
-            <div class="avatar" aria-hidden="true">AI</div>
-            <div class="bubble">안녕하세요! 무엇을 도와드릴까요?</div>
-        </div>
-    </section>
+    <main class="chat" id="chat" aria-live="polite">
+        <section class="welcome" id="welcome">
+            <div class="eyebrow"><span></span> CAMPUS AI CONCIERGE</div>
+            <h1>무엇을 도와드릴까요?</h1>
+            <p>주문 조회부터 캠퍼스 서비스까지,<br>궁금한 내용을 편하게 물어보세요.</p>
+            <div class="suggestions" aria-label="추천 질문">
+                <button type="button" data-prompt="최근 주문 목록을 알려 줘.">
+                    <span class="suggestion-icon">01</span><span><strong>주문 내역 조회</strong><small>최근 주문 목록을 확인해요</small></span><i>→</i>
+                </button>
+                <button type="button" data-prompt="주문한 상품의 배송 상태를 알려 줘.">
+                    <span class="suggestion-icon">02</span><span><strong>배송 상태 확인</strong><small>상품의 현재 위치를 알아봐요</small></span><i>→</i>
+                </button>
+                <button type="button" data-prompt="상품 주문과 관련해 도움이 필요해.">
+                    <span class="suggestion-icon">03</span><span><strong>고객 지원</strong><small>주문 관련 도움을 받아요</small></span><i>→</i>
+                </button>
+            </div>
+        </section>
+        <div class="messages" id="messages"></div>
+    </main>
 
-    <form id="chat-form" class="composer">
-        <label class="sr-only" for="message-input">메시지</label>
-        <textarea id="message-input" rows="1" placeholder="메시지를 입력하세요" autocomplete="off"></textarea>
-        <button id="action-button" type="submit" aria-label="메시지 전송">
-            <span class="send-icon" aria-hidden="true">➤</span>
-            <span class="button-label">전송</span>
-        </button>
-    </form>
-</main>
-<script src="/app.js"></script>
+    <footer class="composer-area">
+        <form class="composer" id="chat-form">
+            <textarea id="message-input" rows="1" maxlength="4000" placeholder="메시지를 입력하세요" aria-label="메시지 입력"></textarea>
+            <button class="send-button" id="send-button" type="submit" aria-label="메시지 전송">
+                <svg class="send-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 7-7 7 7M12 5v14"/></svg>
+                <svg class="stop-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
+            </button>
+        </form>
+        <p class="hint"><kbd>Enter</kbd> 전송 <span>·</span> <kbd>Shift + Enter</kbd> 줄바꿈</p>
+    </footer>
+</div>
+<script src="/app.js" defer></script>
 </body>
 </html>
