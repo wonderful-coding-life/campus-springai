@@ -5,12 +5,12 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/13-mcp-server-streamable.main.iml" filepath="$PROJECT_DIR$/.idea/modules/13-mcp-server-streamable.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/14-mcp-server-stdio.main.iml" filepath="$PROJECT_DIR$/.idea/modules/14-mcp-server-stdio.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/15-mcp-client.main.iml" filepath="$PROJECT_DIR$/.idea/modules/15-mcp-client.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/16-ollama.main.iml" filepath="$PROJECT_DIR$/.idea/modules/16-ollama.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/16-ollama.test.iml" filepath="$PROJECT_DIR$/.idea/modules/16-ollama.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/5-multi-modal-image.main.iml" filepath="$PROJECT_DIR$/.idea/modules/5-multi-modal-image.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/7-rag.main.iml" filepath="$PROJECT_DIR$/.idea/modules/7-rag.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/7-rag.test.iml" filepath="$PROJECT_DIR$/.idea/modules/7-rag.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/8-tool.test.iml" filepath="$PROJECT_DIR$/.idea/modules/8-tool.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/9-structured-output.main.iml" filepath="$PROJECT_DIR$/.idea/modules/9-structured-output.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/9-structured-output.test.iml" filepath="$PROJECT_DIR$/.idea/modules/9-structured-output.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/springai.iml" filepath="$PROJECT_DIR$/springai.iml" />
     </modules>
   </component>
