@@ -7,11 +7,20 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.46/a5cfe99fdf320e84955ef653f2ce1bf789d11385/lombok-1.18.46.jar" />
         </processorPath>
-        <module name="16-ollama.test" />
-        <module name="16-ollama.main" />
+        <module name="12-stream.main" />
+        <module name="12-stream.test" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="14-mcp-server-stdio" target="21" />
+      <module name="14-mcp-server-stdio.main" target="21" />
+      <module name="14-mcp-server-stdio.test" target="21" />
+      <module name="15-mcp-client" target="21" />
+      <module name="15-mcp-client.main" target="21" />
+      <module name="15-mcp-client.test" target="21" />
+      <module name="16-ollama" target="21" />
+      <module name="16-ollama.main" target="21" />
+      <module name="16-ollama.test" target="21" />
       <module name="demo" target="21" />
       <module name="demo.main" target="21" />
       <module name="demo.test" target="21" />
@@ -28,15 +37,24 @@
       <module name="12-stream" options="-parameters" />
       <module name="12-stream.main" options="-parameters" />
       <module name="12-stream.test" options="-parameters" />
+      <module name="13-mcp-server-stdio" options="-parameters" />
+      <module name="13-mcp-server-stdio.main" options="-parameters" />
+      <module name="13-mcp-server-stdio.test" options="-parameters" />
       <module name="13-mcp-server-streamable" options="-parameters" />
       <module name="13-mcp-server-streamable.main" options="-parameters" />
       <module name="13-mcp-server-streamable.test" options="-parameters" />
+      <module name="14-mcp-client" options="-parameters" />
+      <module name="14-mcp-client.main" options="-parameters" />
+      <module name="14-mcp-client.test" options="-parameters" />
       <module name="14-mcp-server-stdio" options="-parameters" />
       <module name="14-mcp-server-stdio.main" options="-parameters" />
       <module name="14-mcp-server-stdio.test" options="-parameters" />
       <module name="15-mcp-client" options="-parameters" />
       <module name="15-mcp-client.main" options="-parameters" />
       <module name="15-mcp-client.test" options="-parameters" />
+      <module name="15-ollama" options="-parameters" />
+      <module name="15-ollama.main" options="-parameters" />
+      <module name="15-ollama.test" options="-parameters" />
       <module name="16-ollama" options="-parameters" />
       <module name="16-ollama.main" options="-parameters" />
       <module name="16-ollama.test" options="-parameters" />
@@ -66,6 +84,8 @@
       <module name="9-structured-output.test" options="-parameters" />
       <module name="com.example.7-rag.main" options="-parameters" />
       <module name="com.example.7-rag.test" options="-parameters" />
+      <module name="com.example.8-tool.main" options="-parameters" />
+      <module name="com.example.8-tool.test" options="-parameters" />
       <module name="demo" options="-parameters" />
       <module name="demo.main" options="-parameters" />
       <module name="demo.test" options="-parameters" />

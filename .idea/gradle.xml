@@ -31,6 +31,15 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/13-mcp-server-stdio" />
+        <option name="gradleJvm" value="temurin-21" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/13-mcp-server-stdio" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/13-mcp-server-streamable" />
         <option name="gradleJvm" value="temurin-21" />
         <option name="modules">
@@ -40,29 +49,20 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/14-mcp-server-stdio" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/14-mcp-client" />
         <option name="gradleJvm" value="temurin-21" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/14-mcp-server-stdio" />
+            <option value="$PROJECT_DIR$/14-mcp-client" />
           </set>
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/15-mcp-client" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/15-ollama" />
         <option name="gradleJvm" value="temurin-21" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/15-mcp-client" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/16-ollama" />
-        <option name="gradleJvm" value="temurin-21" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/16-ollama" />
+            <option value="$PROJECT_DIR$/15-ollama" />
           </set>
         </option>
       </GradleProjectSettings>

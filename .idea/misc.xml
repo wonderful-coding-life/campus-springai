@@ -3,10 +3,12 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/10-image" />
+    <file type="web" url="file://$PROJECT_DIR$/11-special" />
+    <file type="web" url="file://$PROJECT_DIR$/12-stream" />
+    <file type="web" url="file://$PROJECT_DIR$/13-mcp-server-stdio" />
     <file type="web" url="file://$PROJECT_DIR$/13-mcp-server-streamable" />
-    <file type="web" url="file://$PROJECT_DIR$/14-mcp-server-stdio" />
-    <file type="web" url="file://$PROJECT_DIR$/15-mcp-client" />
-    <file type="web" url="file://$PROJECT_DIR$/16-ollama" />
+    <file type="web" url="file://$PROJECT_DIR$/14-mcp-client" />
+    <file type="web" url="file://$PROJECT_DIR$/15-ollama" />
     <file type="web" url="file://$PROJECT_DIR$/2-chat-client" />
     <file type="web" url="file://$PROJECT_DIR$/3-chat-options" />
     <file type="web" url="file://$PROJECT_DIR$/4-chat-memory" />
