@@ -129,6 +129,9 @@ public class RagTests {
 
     @Test
     public void testTextReader() {
+        // file:///C:/data/운수좋은날.txt
+        // file:/home/user/data/운수좋은날.txt
+        // https://example.com/운수좋은날.txt
         var reader = new TextReader("classpath:/운수좋은날.txt");
         var documents = reader.read();
         var splitter = TokenTextSplitter.builder().withChunkSize(300).build();
@@ -200,5 +203,4 @@ public class RagTests {
         List<Document> documents = reader.get();
         vectorStore.write(documents);
     }
-
 }
