@@ -13,9 +13,9 @@
 ### 애플리케이션 설정 (application.properties)
 
 ```properties
-spring.datasource.url=jdbc:mariadb://localhost:3306/mydb
-spring.datasource.username=myuser
-spring.datasource.password=mypass
+spring.datasource.url=${DB_URL}
+spring.datasource.username=${DB_USER}
+spring.datasource.password=${DB_PASSWORD}
 
 spring.ai.chat.memory.repository.jdbc.initialize-schema=always
 ```

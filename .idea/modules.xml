@@ -8,7 +8,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/11-special.test.iml" filepath="$PROJECT_DIR$/.idea/modules/11-special.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/12-stream.main.iml" filepath="$PROJECT_DIR$/.idea/modules/12-stream.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/12-stream.test.iml" filepath="$PROJECT_DIR$/.idea/modules/12-stream.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/13-mcp-server-stdio.main.iml" filepath="$PROJECT_DIR$/.idea/modules/13-mcp-server-stdio.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/13-mcp-server-streamable.main.iml" filepath="$PROJECT_DIR$/.idea/modules/13-mcp-server-streamable.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/14-mcp-client.main.iml" filepath="$PROJECT_DIR$/.idea/modules/14-mcp-client.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/14-mcp-client.test.iml" filepath="$PROJECT_DIR$/.idea/modules/14-mcp-client.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/3-chat-options.main.iml" filepath="$PROJECT_DIR$/.idea/modules/3-chat-options.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/4-chat-memory.main.iml" filepath="$PROJECT_DIR$/.idea/modules/4-chat-memory.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/5-multi-modal-image.main.iml" filepath="$PROJECT_DIR$/.idea/modules/5-multi-modal-image.main.iml" />
