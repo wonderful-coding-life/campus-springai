@@ -17,8 +17,6 @@ public class ApiController {
 
     @Autowired
     private VectorStore vectorStore;
-    @Autowired
-    private ChatModel chatModel;
 
     @PostMapping("/api/v1/chats")
     public String postChats(@RequestBody String message) {
@@ -26,7 +24,6 @@ public class ApiController {
                 .system("당신은 캠퍼스 쇼핑몰 고객센터 상담원이야. 친절하고 명확하며 간략하게 답변 해 줘.")
                 .advisors(QuestionAnswerAdvisor.builder(vectorStore)
                         .searchRequest(SearchRequest.builder()
-                                .query(message)
                                 .similarityThreshold(0.7)
                                 .topK(2)
                                 .filterExpression("category == 'markdown'")
@@ -45,7 +42,6 @@ public class ApiController {
                 .system("당신은 캠퍼스 쇼핑몰 고객센터 상담원이야. 친절하고 명확하며 간략하게 답변 해 줘.")
                 .advisors(QuestionAnswerAdvisor.builder(vectorStore)
                         .searchRequest(SearchRequest.builder()
-                                .query(message)
                                 .similarityThreshold(0.7)
                                 .topK(2)
                                 .filterExpression("category == 'markdown'")

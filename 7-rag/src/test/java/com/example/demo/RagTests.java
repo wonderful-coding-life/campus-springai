@@ -3,7 +3,9 @@ package com.example.demo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
+import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.document.DocumentReader;
 import org.springframework.ai.openai.OpenAiEmbeddingModel;
@@ -129,7 +131,7 @@ public class RagTests {
 
     @Test
     public void testTextReader() {
-        // file:///C:/data/운수좋은날.txt
+        // file:C:/data/운수좋은날.txt
         // file:/home/user/data/운수좋은날.txt
         // https://example.com/운수좋은날.txt
         var reader = new TextReader("classpath:/운수좋은날.txt");
@@ -139,54 +141,53 @@ public class RagTests {
     }
 
     @Test
-    public void testSimilaritySearchInTextFile() {
-        var question = "주인공 김첨지는 어떤 일을 하는 사람인가요?";
-//        var question = "김첨지 아내는 무슨 병에 걸렸나요?";
-//        var question = "김첨지가 '오늘은 운수 좋은 날'이라고 생각한 이유는 무엇인가요?";
-//        var question = "김첨지는 왜 비 오는 날에 나가 일하게 되었나요?";
+    public void testSimilaritySearchPromptTemplate() {
+        PromptTemplate promptTemplate = PromptTemplate.builder()
+                .template("""
+                사용자 질문:
+                {query}
 
+                아래는 관련 문서입니다.
+                ---------------------
+                {question_answer_context}
+                ---------------------
+
+                관련 문서를 참고해서 질문에 답변하세요.
+                문서에 답변할 내용이 없으면 모른다고 답변하세요.
+                """)
+                .build();
+
+        var advisor = QuestionAnswerAdvisor.builder(vectorStore)
+                .searchRequest(SearchRequest.builder()
+                        .filterExpression("source == '운수좋은날.txt'")
+                        .similarityThreshold(0.7)
+                        .topK(2)
+                        .build())
+                .promptTemplate(promptTemplate)
+                .build();
+
+        var question = "김첨지는 남대문 정거장까지 학생을 태워다 주고 얼마를 받았나요?";
+        // var question = "김첨지는 아픈 아내에게 무엇을 사다 주려고 했나요?";
+        // var question = "김첨지의 아내는 남편이 집을 나설 때 무엇을 부탁했나요?";
+        // var question = "주인공 김첨지는 어떤 일을 하는 사람인가요?";
+        // var question = "김첨지 아내는 무슨 병에 걸렸나요?";
         var completion = chatClient.prompt()
-                .advisors(QuestionAnswerAdvisor.builder(vectorStore).build())
                 .user(question)
+                .advisors(advisor)
                 .call().content();
 
-        log.info("\ncompletion = {}", completion);
+        log.info("{}", completion);
     }
 
     @Test
-    public void testPdfReader() throws IOException {
-        embedPdfDocument("classpath:/캠퍼스 온라인 쇼핑몰 반품 정책 매뉴얼.pdf");
-        embedPdfDocument("classpath:/캠퍼스 온라인 쇼핑몰 반품 FAQ.pdf");
-    }
-
-    private void embedPdfDocument(String path) {
-        DocumentReader reader = new PagePdfDocumentReader(path);
+    public void testPdfReader() {
+        // 캠퍼스 온라인 쇼핑몰 반품 정책 매뉴얼.pdf
+        // 캠퍼스 온라인 쇼핑몰 반품 FAQ.pdf
+        DocumentReader reader = new PagePdfDocumentReader("classpath:/캠퍼스 온라인 쇼핑몰 반품 FAQ.pdf");
         List<Document> documents = reader.read();
-        documents.forEach(document -> document.getMetadata().put("category", "pdf"));
+        documents.forEach(document -> document.getMetadata().put("docType", "pdf"));
         TokenTextSplitter splitter = TokenTextSplitter.builder().build();
         vectorStore.write(splitter.split(documents));
-    }
-
-    @Test
-    public void testSimilaritySearchInPdfFile() {
-        String question = "제가 교재를 구매했는데 책에 필기를 조금 했습니다. 반품하려면 배송비는 누가 부담하고 환불은 받을 수 있나요?";
-        //String question = "쿠폰과 적립금을 사용해서 결제했는데 일부 상품만 반품하면 환불 금액은 어떻게 계산되나요?";
-        //String question = "주문한 상품과 다른 상품이 배송됐는데 반품 절차와 환불까지 걸리는 시간을 알려주세요.";
-
-        var completion = chatClient.prompt()
-                .system("당신은 캠퍼스 쇼핑몰 고객센터 상담원이야. 친절하고 명확하며 간략하게 답변 해 줘.")
-                .advisors(QuestionAnswerAdvisor.builder(vectorStore)
-                        .searchRequest(SearchRequest.builder()
-                                .query(question)
-                                .similarityThreshold(0.7)
-                                .topK(2)
-                                .filterExpression("category == 'markdown'")
-                                .build())
-                        .build())
-                .user(question)
-                .call().content();
-
-        log.info("\ncompletion = {}", completion);
     }
 
     @Test
@@ -195,12 +196,36 @@ public class RagTests {
                 .withIncludeCodeBlock(true)
                 .withIncludeBlockquote(true)
                 .withHorizontalRuleCreateDocument(true)
-                .withAdditionalMetadata("category", "markdown")
+                .withAdditionalMetadata("docType", "markdown")
                 .build();
 
-        var reader = new MarkdownDocumentReader("classpath*:*.md", config);
+        var reader = new MarkdownDocumentReader("classpath*:/**/*.md", config);
 
         List<Document> documents = reader.get();
         vectorStore.write(documents);
+    }
+
+    @Test
+    public void testSimilaritySearchInDocs() {
+        String question = "제가 교재를 구매했는데 책에 필기를 조금 했습니다. 반품하려면 배송비는 누가 부담하고 환불은 받을 수 있나요?";
+        //String question = "쿠폰과 적립금을 사용해서 결제했는데 일부 상품만 반품하면 환불 금액은 어떻게 계산되나요?";
+        //String question = "주문한 상품과 다른 상품이 배송됐는데 반품 절차와 환불까지 걸리는 시간을 알려주세요.";
+
+        var completion = chatClient.prompt()
+                .system("당신은 캠퍼스 쇼핑몰 고객센터 상담원이야. 친절하고 명확하며 간략하게 답변 해 줘.")
+                .advisors(QuestionAnswerAdvisor.builder(vectorStore)
+                        .order(100)
+                        .searchRequest(SearchRequest.builder()
+                                .query(question)
+                                .similarityThreshold(0.7)
+                                .topK(2)
+                                .filterExpression("docType == 'markdown'") // pdf
+                                .build())
+                        .build())
+                .advisors(SimpleLoggerAdvisor.builder().order(200).build())
+                .user(question)
+                .call().content();
+
+        log.info("\ncompletion = {}", completion);
     }
 }
