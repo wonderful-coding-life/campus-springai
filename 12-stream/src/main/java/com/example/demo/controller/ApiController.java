@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 @RestController
 public class ApiController {
@@ -13,7 +13,7 @@ public class ApiController {
     private ChatClient chatClient;
 
     @Autowired
-    private ObjectMapper objectMapper;
+    private JsonMapper jsonMapper;
 
     @GetMapping(value="/chats", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> getChats(@RequestParam("message") String message) {
@@ -21,7 +21,7 @@ public class ApiController {
                 .user(message)
                 .stream()
                 .content()
-                .map(objectMapper::writeValueAsString);
+                .map(jsonMapper::writeValueAsString);
     }
 
     @PostMapping(value="/chats", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
@@ -30,6 +30,6 @@ public class ApiController {
                 .user(message)
                 .stream()
                 .content()
-                .map(objectMapper::writeValueAsString);
+                .map(jsonMapper::writeValueAsString);
     }
 }
