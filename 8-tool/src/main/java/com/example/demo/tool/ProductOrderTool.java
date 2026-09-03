@@ -14,14 +14,14 @@ public class ProductOrderTool {
     @Autowired
     private ProductOrderRepository repository;
 
-    @Tool(description = "상품 주문 목록을 조회합니다")
+    @Tool(description = "주문목록(주문번호, 상품이름, 배송주소, 배송상태)을 조회합니다")
     String getProductOrders(ToolContext toolContext) {
         String username = (String) toolContext.getContext().get("username");
         var productOrders = repository.findByMemberName(username);
         if (productOrders.isEmpty()) {
-            return "주문 목록이 없습니다.";
+            return "주문목록이 없습니다.";
         } else {
-            StringBuilder result = new StringBuilder("주문 목록은 다음과 같아요\n");
+            StringBuilder result = new StringBuilder("주문목록은 다음과 같아요\n");
             for (var productOrder : productOrders) {
                 result.append("주문번호: ").append(productOrder.getOrderNumber());
                 result.append(", 상품이름: ").append(productOrder.getProductName());
@@ -33,7 +33,7 @@ public class ProductOrderTool {
         }
     }
 
-    @Tool(description = "상품 주문을 취소합니다")
+    @Tool(description = "주문번호를 사용하여 상품주문을 취소합니다")
     String cancelProductOrder(@ToolParam(description = "주문번호") String orderNumber, ToolContext toolContext) {
         String username = (String) toolContext.getContext().get("username");
         var productOrder = repository.findByOrderNumberAndMemberName(orderNumber, username);
