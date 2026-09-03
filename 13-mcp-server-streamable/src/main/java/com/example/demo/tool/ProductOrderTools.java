@@ -14,14 +14,16 @@ public class ProductOrderTools {
     @Autowired
     private ProductOrderRepository repository;
 
-    @McpTool(name="get-product-orders", title="상품 주문 목록 조회", description = "상품 주문 목록을 조회합니다")
+    @McpTool(name="get-product-orders",
+            title="상품 주문목록 조회",
+            description = "주문목록(주문번호, 상품이름, 배송주소, 배송상태)을 조회합니다")
     String getProductOrders(McpMeta mcpMeta) {
         String username = (String) mcpMeta.get("username");
         var productOrders = repository.findByMemberName(username);
         if (productOrders.isEmpty()) {
-            return "주문 목록이 없습니다.";
+            return "주문목록이 없습니다.";
         } else {
-            StringBuilder result = new StringBuilder("주문 목록은 다음과 같아요\n");
+            StringBuilder result = new StringBuilder("주문목록은 다음과 같아요\n");
             for (var productOrder : productOrders) {
                 result.append("주문번호: ").append(productOrder.getOrderNumber());
                 result.append(", 상품이름: ").append(productOrder.getProductName());
@@ -33,7 +35,9 @@ public class ProductOrderTools {
         }
     }
 
-    @McpTool(name="cancel-product-order", title="상품 주문 취소", description = "상품 주문을 취소합니다")
+    @McpTool(name="cancel-product-order",
+            title="상품주문 취소",
+            description = "주문번호를 사용하여 상품주문을 취소합니다")
     String cancelProductOrder(@McpToolParam(description = "주문번호") String orderNumber, McpMeta mcpMeta) {
         String username = (String) mcpMeta.get("username");
         var productOrder = repository.findByOrderNumberAndMemberName(orderNumber, username);
