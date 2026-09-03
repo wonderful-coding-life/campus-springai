@@ -7,8 +7,8 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.46/a5cfe99fdf320e84955ef653f2ce1bf789d11385/lombok-1.18.46.jar" />
         </processorPath>
-        <module name="14-mcp-client.main" />
-        <module name="14-mcp-client.test" />
+        <module name="chatbot.test" />
+        <module name="chatbot.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -82,6 +82,9 @@
       <module name="9-structured-output" options="-parameters" />
       <module name="9-structured-output.main" options="-parameters" />
       <module name="9-structured-output.test" options="-parameters" />
+      <module name="chatbot" options="-parameters" />
+      <module name="chatbot.main" options="-parameters" />
+      <module name="chatbot.test" options="-parameters" />
       <module name="com.example.7-rag.main" options="-parameters" />
       <module name="com.example.7-rag.test" options="-parameters" />
       <module name="com.example.8-tool.main" options="-parameters" />

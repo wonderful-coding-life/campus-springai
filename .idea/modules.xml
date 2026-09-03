@@ -21,6 +21,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/7-rag.test.iml" filepath="$PROJECT_DIR$/.idea/modules/7-rag.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/9-structured-output.main.iml" filepath="$PROJECT_DIR$/.idea/modules/9-structured-output.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/9-structured-output.test.iml" filepath="$PROJECT_DIR$/.idea/modules/9-structured-output.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chatbot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/chatbot.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chatbot.test.iml" filepath="$PROJECT_DIR$/.idea/modules/chatbot.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/springai.iml" filepath="$PROJECT_DIR$/springai.iml" />
     </modules>
   </component>
