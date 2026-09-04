@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>마케팅 문구 결과</title>
+</head>
+<body>
+<main class="container">
+    <div th:text="${completion}">결과가 여기에 표시됩니다.</div>
+    <hr>
+    <div th:utext="${formatted}">결과가 여기에 표시됩니다.</div>
+    <p><a th:href="@{/marketing}">마케팅 문구 작성</a></p>
+</main>
+</body>
+</html>
