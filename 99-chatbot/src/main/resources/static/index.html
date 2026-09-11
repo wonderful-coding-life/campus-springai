@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2563eb">
+  <title>캠퍼스 쇼핑몰 고객센터</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="chat-app" aria-label="캠퍼스 쇼핑몰 고객센터 채팅">
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <div>
+          <h1>캠퍼스 쇼핑몰</h1>
+          <p>고객센터 AI 상담</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <label class="customer-name" for="username">
+          <span>고객명</span>
+          <input id="username" name="username" type="text" value="고객" maxlength="50" autocomplete="name" placeholder="고객명 입력">
+        </label>
+        <button id="new-chat" class="secondary-button" type="button">새 대화</button>
+      </div>
+    </header>
+
+    <section id="messages" class="messages" aria-live="polite" aria-label="대화 내용">
+      <div class="message assistant-message">
+        <div class="avatar" aria-hidden="true">AI</div>
+        <div class="bubble">안녕하세요. 캠퍼스 쇼핑몰 고객센터입니다.<br>주문, 배송, 반품에 관해 무엇을 도와드릴까요?</div>
+      </div>
+    </section>
+
+    <form id="chat-form" class="composer">
+      <label class="sr-only" for="message-input">메시지</label>
+      <textarea id="message-input" rows="1" maxlength="4000" placeholder="메시지를 입력하세요" autocomplete="off"></textarea>
+      <button id="send-button" class="send-button" type="submit" aria-label="메시지 전송">
+        <span class="send-label">전송</span>
+        <span class="stop-label">중지</span>
+      </button>
+    </form>
+    <p class="hint">Enter로 전송 · Shift + Enter로 줄바꿈</p>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
