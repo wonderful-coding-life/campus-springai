@@ -10,10 +10,9 @@ CREATE TABLE IF NOT EXISTS vector_store (
     content TEXT,
     metadata JSON,
     embedding VECTOR(1536) NOT NULL,
-    VECTOR INDEX vector_store_embedding_idx (embedding)
+    VECTOR INDEX vector_store_embedding_idx (embedding) DISTANCE=cosine
 ) ENGINE=InnoDB;
 ```
-
 
 ## 벡터 입력 샘플
 
