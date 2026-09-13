@@ -9,6 +9,12 @@
 - H2 Database
 - Lombok
 
+Streamable MCP Server를 위해 포함된 의존성을 다음과 같이 `-webmvc`가 추가된 것으로 교체해 주어야 한다.
+
+```properties
+implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webmvc'
+```
+
 ### 애플리케이션 설정 (application.properties)
 
 ```properties
@@ -52,8 +58,26 @@ MCP Inspector는 node.js 기반으로 MCP 서버 테스트를 위한 UI를 제�
 npx @modelcontextprotocol/inspector
 ```
 
-```text
-Transport Type: Streamable HTTP
-URL: http://localhost:8080/mcp
-Connection Type: Via Proxy
+최신 버전 실행
+
+```cmd
+npx @modelcontextprotocol/inspector@latest
+```
+
+MCP Inspector에 MCP Server 등록 및 테스트
+
+- Add Servers + add manually
+
+```
+Server ID : product-order
+Transport : streamable-http
+URL : http://localhost:8080/mcp
+```
+
+- Settings - Request Metadata
+
+```json
+{
+  "username": "seojun"
+}
 ```
