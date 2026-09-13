@@ -16,9 +16,11 @@ STDIO 방식의 경우 표준 입출력을 사용하므로 애플리케이션에
 
 ```properties
 spring.ai.mcp.server.stdio=true
-logging.pattern.console=
+
+logging.console.enabled=false
 spring.main.banner-mode=off
 spring.main.log-startup-info=false
+
 logging.file.name=./log/datetime-mcp-server.log
 ```
 
