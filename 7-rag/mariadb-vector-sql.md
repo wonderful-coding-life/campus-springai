@@ -31,7 +31,7 @@ INSERT INTO vector_store (
 ## 벡터 쿼리
 
 ```sql
-SELECT content, VEC_ToText(embedding) FROM vector_store;
+SELECT content, VEC_toText(embedding) FROM vector_store;
 ```
 
 ## 메타데이터 필터링
