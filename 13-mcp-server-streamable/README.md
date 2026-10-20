@@ -4,18 +4,19 @@
  
 ### 스프링 이니셜라이저
 
+- Spring Web
 - Model Context Protocol Server
 - Spring Data JPA
 - H2 Database
 - Lombok
 
-Streamable MCP Server를 위해 포함된 의존성을 다음과 같이 `-webmvc`가 추가된 것으로 교체해 주어야 한다.
-
-```properties
-implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webmvc'
-```
+Model Context Protocol Server 스타터는 Streamable용과 STDIO용 두가지가 있다.
+Spring Web을 함께 포함하면 Streamable용 스타터(끝에 -webmvc가 붙는)가 포함되고, Spring Web을 포함하지 않으면 STDIO용 스타터가 포함된다.
 
 ### 애플리케이션 설정 (application.properties)
+
+원래 streamable이 default라 설정하지 않아도 동작해야 하지만 버그로 인해 설정하지 않으면 안된다.
+https://github.com/spring-projects/spring-ai/issues/7207
 
 ```properties
 spring.ai.mcp.server.protocol=streamable
