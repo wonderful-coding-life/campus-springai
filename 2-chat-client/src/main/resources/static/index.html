@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8fc">
+  <title>모아 — AI와 대화하기</title>
+  <link rel="stylesheet" href="/css/chat.css">
+  <script src="/js/chat.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="앱 메뉴">
+      <a class="brand" href="/" aria-label="모아 홈">
+        <span class="brand-mark" aria-hidden="true">m</span>
+        <span>모아</span>
+      </a>
+      <button class="new-chat" id="new-chat" type="button"><span aria-hidden="true">＋</span> 새 대화</button>
+      <div class="sidebar-bottom">
+        <div class="profile-avatar" aria-hidden="true">나</div>
+        <div class="profile-copy"><strong>나의 공간</strong><span>편안하게 대화해요</span></div>
+        <span class="profile-menu" aria-hidden="true">···</span>
+      </div>
+    </aside>
+
+    <main class="chat-panel">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark" aria-hidden="true">m</span><strong>모아</strong></div>
+        <div class="assistant-label"><span class="status-dot"></span><span>AI 어시스턴트</span><span class="model-pill">기본</span></div>
+        <button class="icon-button" id="clear-chat" type="button" aria-label="대화 지우기" title="대화 지우기">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>
+        </button>
+      </header>
+
+      <section class="conversation" id="conversation" aria-label="대화 내용" aria-live="polite">
+        <div class="welcome" id="welcome">
+          <div class="welcome-icon" aria-hidden="true"><span>✳</span></div>
+          <p class="eyebrow">오늘은 무엇을 도와드릴까요?</p>
+          <h1>반가워요, 무엇이든<br class="mobile-break"> 편하게 물어보세요.</h1>
+          <p class="welcome-description">아이디어를 정리하거나 궁금한 것을 물어보세요.<br class="desktop-break"> 대화를 시작하면 함께 답을 찾아갈게요.</p>
+          <div class="suggestions" aria-label="질문 예시">
+            <button class="suggestion" type="button" data-prompt="새로운 취미를 찾고 있어. 추천해 줄래?">🌱 새로운 취미 추천해 줘</button>
+            <button class="suggestion" type="button" data-prompt="복잡한 일을 시작할 때 도움이 되는 방법을 알려줘.">🧩 일을 차근차근 시작하는 법</button>
+            <button class="suggestion" type="button" data-prompt="주말에 기분 전환하기 좋은 방법을 알려줘.">☀️ 주말 기분 전환 아이디어</button>
+          </div>
+        </div>
+        <div class="messages" id="messages"></div>
+        <div class="bottom-anchor" id="bottom-anchor"></div>
+      </section>
+
+      <footer class="composer-area">
+        <form class="composer" id="chat-form">
+          <label class="sr-only" for="message-input">메시지 입력</label>
+          <textarea id="message-input" rows="1" maxlength="8000" placeholder="메시지를 입력하세요" autocomplete="off"></textarea>
+          <div class="composer-tools">
+            <span class="keyboard-hint">Enter로 전송 · Shift + Enter로 줄바꿈</span>
+            <button class="send-button" id="send-button" type="submit" aria-label="메시지 전송" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-7 7 7-7 7 7"/></svg>
+            </button>
+          </div>
+        </form>
+        <p class="disclaimer">AI가 생성한 답변은 사실과 다를 수 있어요. 중요한 정보는 한 번 더 확인해 주세요.</p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
